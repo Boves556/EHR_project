@@ -1,0 +1,78 @@
+<!-- doctor-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="doctor-dashboard.html">EHR System</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav" id="navbarLinks">
+            <!-- Patient list link and dashboard link will be dynamically added by JavaScript when logged in -->
+          </ul>
+          <a
+            href="index.html"
+            id="loginLogoutButton"
+            class="btn btn-teal ms-auto"
+            >Login</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h1>Welcome, Dr. <span id="doctorName"></span></h1>
+      <p class="lead">
+        Specialization: <span id="doctorSpecialization"></span>
+      </p>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Quick Actions</h3>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a href="patients.html" class="text-decoration-none"
+                >View Patient List</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a href="ehr.html" class="text-decoration-none"
+                >Add New Patient</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <h3>Your Statistics</h3>
+          <p>Total patients: <span id="patientCount">Loading...</span></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/doctor-dashboard.js"></script>
+  </body>
+</html>
+<!-- TODO: Add edit profile menu -->
