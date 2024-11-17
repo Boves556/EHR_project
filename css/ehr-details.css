@@ -1,71 +1,35 @@
-.patient-sidebar {
-    background-color: #f8f9fa;
-    padding: 1rem;
-    border-right: 1px solid #e3e3e3;
-  }
 
-  .ehr-section {
-    background-color: #ffffff;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1.5rem;
-  }
 
-  .ehr-section h5 {
-    font-size: 1.25rem;
-    color: #343a40;
-    margin-bottom: 1rem;
-  }
+.ehr-image-section img {
 
-  .ehr-image-section {
-    border: 1px solid #e3e3e3;
-    padding: 0.5rem;
-    text-align: center;
-  }
+  /* height: auto; */
+}
 
-  .ehr-image-section img {
-    max-width: 100%;
-    height: auto;
-  }
+.subtitle-textarea {
+  resize: vertical;
+  overflow-y: scroll;
+  height: auto;
+  min-height: calc(1.5em * 5);
+  /* 5 lines high */
+}
 
-  .btn-gradient {
-    background: linear-gradient(45deg, #6a0dad, #9370db);
-    border: none;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    transition: background 0.3s ease;
-  }
-
-  .btn-gradient:hover {
-    background: linear-gradient(45deg, #9370db, #6a0dad);
-    color: white;
-  }
-
-  .subtitle-textarea {
-    resize: vertical;
-    overflow-y: scroll;
-    height: auto;
-    min-height: calc(1.5em * 5); /* 5 lines high */
-  }
-
-  /* Adjust button container margin */
+/* Adjust button container margin */
 .patient-sidebar .d-flex {
-    margin-top: 1rem;
-  }
-  
-  .btn {
-    padding: 0.8rem 1.5rem; /* Consistent padding */
-    font-size: 1rem; /* Consistent font size */
-  }
-  
-  /* Ensure both buttons have the same width */
-  .btn.w-100 {
-    width: 100%;
-  }
-  
-  .btn-danger.w-100 {
-    width: 100%;
-  }
-  
+  margin-top: 1rem;
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  /* Consistent padding */
+  font-size: 1rem;
+  /* Consistent font size */
+}
+
+/* Ensure both buttons have the same width */
+.btn.w-100 {
+  width: 100%;
+}
+
+.btn-danger.w-100 {
+  width: 100%;
+}

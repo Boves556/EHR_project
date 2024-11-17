@@ -1,43 +1,129 @@
-/* Button styles */
-.btn-primary {
-  background: linear-gradient(45deg, #6a0dad, #9370db);
-  border: none;
-  color: white;
-  padding: 0.625rem 1.25rem; /* 10px 20px */
-  font-size: 1rem; /* 16px */
-  transition: background 0.3s ease;
-}
+/* =============== BOOTSTRAP OVERRIDES =============== */
 
-.btn-primary:hover {
-  background: linear-gradient(45deg, #9370db, #6a0dad);
-}
-
-/* Navbar gradient styles */
+/* Navbar */
 .navbar {
   background: linear-gradient(45deg, #6a0dad, #9370db);
   border: none;
 }
 
-/* Nav link styles with hover */
 .navbar-nav .nav-link {
   color: white;
   transition: color 0.3s ease;
 }
 
 .navbar-nav .nav-link:hover {
-  color: #dcdcdc; /* Light grey hover effect */
+  color: #dcdcdc;
 }
 
-/* Teal color for the Login button */
-.btn-teal {
-  background-color: #008080; /* Teal */
+/* Card */
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+
+/*  =============== GLOBAL STYLES =============== */
+
+/* Button Styles */
+.btn-gradient-purple {
+  background: linear-gradient(45deg, #6a0dad, #9370db);
+  border: none;
+  color: white;
+  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.btn-gradient-purple:hover {
+  background: linear-gradient(45deg, #9370db, #6a0dad);
+  color: white;
+}
+
+.btn-theme-primary {
+  background-color: #008080;
   color: white;
   border: none;
-  padding: 0.5rem 1rem; /* 8px 16px */
-  font-size: 1rem; /* 16px */
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
   transition: background-color 0.3s ease;
 }
 
-.btn-teal:hover {
-  background-color: #006666; /* Darker teal on hover */
+.btn-theme-primary:hover {
+  background-color: #006666;
+  color: white;
 }
+
+.btn-theme-secondary {
+  background-color: white;
+  color: #6a0dad;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-theme-secondary:hover {
+  background-color: #f0f0f0;
+  color: #6a0dad;
+}
+
+/* Footer */
+.footbar {
+  background: linear-gradient(45deg, #6a0dad, #9370db);
+  border: none;
+}
+
+/*  =============== HOME PAGE =============== */
+
+/* Hero Section */
+.hero {
+  background-image: url("path-to-your-background-image.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #2e0662;
+}
+
+.hero-heading,
+.hero-subheading {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+/*  =============== PATIENTS LIST PAGE (EHR) =============== */
+
+.patient-info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.patient-info-table th,
+.patient-info-table td {
+  padding: 0.8rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.sort-btn {
+  margin-left: 1rem;
+}
+
+/*  =============== PATIENT DETAILS PAGE (EHR) =============== */
+
+.patient-sidebar {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-right: 1px solid #e3e3e3;
+}
+
+.ehr-section {
+  border: 1px solid #e3e3e3;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+

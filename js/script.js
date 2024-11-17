@@ -17,10 +17,11 @@ function handleLoginLogoutButton() {
 
   if (loggedIn && loggedInDoctor) {
     loginLogoutButton.innerText = "Logout";
-    loginLogoutButton.classList.replace("btn-teal", "btn-danger");
+    loginLogoutButton.classList.replace("btn-theme-primary", "btn-danger");
     loginLogoutButton.href = "#"; // Prevent redirect for logout
     loginLogoutButton.addEventListener("click", handleLogout);
 
+    // Add "Dashboard" link if not already present
     if (!document.getElementById("dashboardLink")) {
       const dashboardLink = document.createElement("li");
       dashboardLink.classList.add("nav-item");
@@ -29,10 +30,38 @@ function handleLoginLogoutButton() {
         '<a class="nav-link" href="doctor-dashboard.html">Dashboard</a>';
       navbarLinks.appendChild(dashboardLink);
     }
+
+    // Add "Your Patients" link
+    if (!document.getElementById("yourPatientsLink")) {
+      const yourPatientsLink = document.createElement("li");
+      yourPatientsLink.classList.add("nav-item");
+      yourPatientsLink.id = "yourPatientsLink";
+      yourPatientsLink.innerHTML =
+        '<a class="nav-link" href="patients.html">Your Patients</a>';
+      navbarLinks.appendChild(yourPatientsLink);
+    }
+
+    // Add "New Patient" link
+    if (!document.getElementById("newPatientLink")) {
+      const newPatientLink = document.createElement("li");
+      newPatientLink.classList.add("nav-item");
+      newPatientLink.id = "newPatientLink";
+      newPatientLink.innerHTML =
+        '<a class="nav-link" href="ehr.html">New Patient</a>';
+      navbarLinks.appendChild(newPatientLink);
+    }
   } else {
     loginLogoutButton.innerText = "Login";
-    loginLogoutButton.classList.replace("btn-danger", "btn-teal");
+    loginLogoutButton.classList.replace("btn-danger", "btn-theme-primary");
     loginLogoutButton.href = "index.html";
+
+    // Remove dynamic links when logged out
+    ["dashboardLink", "yourPatientsLink", "newPatientLink"].forEach(
+      (linkId) => {
+        const link = document.getElementById(linkId);
+        if (link) link.remove();
+      }
+    );
   }
 }
 
@@ -64,7 +93,7 @@ document
       JSON.stringify({ fullName, email, password })
     );
     alert("Registration successful! Please log in.");
-    window.location.href = "index.html";
+    window.location.href = "login.html";
   });
 
 // Login Form Logic
@@ -86,30 +115,6 @@ document
     }
   });
 
-// Patient Form Submission Logic
-document
-  .getElementById("ehrForm")
-  ?.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
-    const dob = document.getElementById("dob").value;
-    const gender = document.querySelector('input[name="gender"]:checked').value;
-    const country = document.getElementById("Country").value;
-    const loggedInDoctor = JSON.parse(localStorage.getItem("logged_in_doctor"));
-
-    if (loggedInDoctor) {
-      const patientsKey = "patients_" + loggedInDoctor.email;
-      const patients = JSON.parse(localStorage.getItem(patientsKey)) || [];
-      patients.push({ firstName, lastName, dob, gender, country });
-      localStorage.setItem(patientsKey, JSON.stringify(patients));
-      alert("Patient added successfully!");
-      window.location.href = "patients.html";
-    } else {
-      alert("Please log in to add a patient.");
-    }
-  });
-
 // Display Patients
 function displayPatients() {
   const patientList = document.getElementById("patientList");
@@ -123,15 +128,13 @@ function displayPatients() {
 
     patientList.innerHTML = patients.length
       ? patients
-          .map(
-            (p, i) =>
-              `<tr><td>${p.firstName} ${p.lastName}</td><td>${
-                p.gender
-              }</td><td>${
-                p.country || "N/A"
-              }</td><td><a href="ehr-details.html?patient=${i}" class="btn btn-primary">View</a></td></tr>`
-          )
-          .join("")
+        .map(
+          (p, i) =>
+            `<tr><td>${p.firstName} ${p.lastName}</td><td>${p.gender
+            }</td><td>${p.country || "N/A"
+            }</td><td><a href="ehr-details.html?patient=${i}" class="btn btn-gradient-purple">View</a></td></tr>`
+        )
+        .join("")
       : "<tr><td colspan='5'>No patients found.</td></tr>";
   }
 }

@@ -3,18 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - EHR System</title>
+    <title>Home - MedConnectPro</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/index.css" />
   </head>
+
   <body>
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="doctor-dashboard.html">EHR System</a>
+        <!-- Brand Logo -->
+        <a class="navbar-brand" href="index.html">MedConnectPro</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -27,54 +29,111 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav" id="navbarLinks">
-            <!-- Patient list link and dashboard link will be dynamically added by JavaScript when logged in -->
+          <!-- Left-aligned links closer to the brand logo -->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="services.html">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="news.html">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
           </ul>
-          <a
-            href="index.html"
-            id="loginLogoutButton"
-            class="btn btn-teal ms-auto"
-            >Login</a
-          >
+
+          <!-- Right-aligned Login and Register buttons -->
+          <ul class="navbar-nav ms-auto gap-1">
+            <li class="nav-item">
+              <a class="btn btn-theme-secondary" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-theme-primary" href="register.html">Register</a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container form-container">
-      <h2 class="text-center mb-4">Log in</h2>
-      <form id="loginForm">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="email" required />
-          <div class="invalid-feedback">
-            Please enter a valid email address.
+    <!-- Main Content -->
+    <header class="text-center py-5 bg-light hero">
+      <div class="container">
+        <h1 class="display-4 hero-heading">
+          <strong>Welcome to MedConnectPro</strong>
+        </h1>
+        <p class="lead hero-subheading">
+          A comprehensive platform for managing electronic health records,
+          ensuring efficient and secure healthcare data management.
+        </p>
+        <a href="contact.html" class="btn btn-gradient-purple btn-lg mt-3"
+          >Contact Us</a
+        >
+      </div>
+    </header>
+
+    <!-- Feature Highlights Section -->
+    <section class="container py-5">
+      <div class="row text-center">
+        <h2 class="mb-4">Our Key Features</h2>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Patient Management</h5>
+              <p class="card-text">
+                Easily view, update, and manage patient records securely in one
+                place.
+              </p>
+            </div>
           </div>
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" required />
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Appointment Scheduling</h5>
+              <p class="card-text">
+                Schedule and keep track of patient appointments with ease.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="form-check mb-3">
-          <input type="checkbox" class="form-check-input" id="showPassword" />
-          <label for="showPassword" class="form-check-label">
-            Show Password
-          </label>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Data Security</h5>
+              <p class="card-text">
+                State-of-the-art security features to protect patient data and
+                ensure privacy.
+              </p>
+            </div>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Login</button>
-      </form>
-      <a href="forgot-password.html" class="d-block text-center mt-2"
-        >Forgot password?</a
-      >
-
-      <!-- New section for doctor's registration -->
-      <div class="mt-4 text-center">
-        <p>New here? Register as a doctor using the link below:</p>
-        <a href="register.html" class="btn btn-gradient">Doctor Registration</a>
       </div>
-    </div>
+    </section>
 
-    <script src="js/script.js"></script>
+    <!-- About Section -->
+    <section class="bg-light py-5">
+      <div class="container text-center">
+        <h2>About MedConnectPro</h2>
+        <p class="lead">
+          Our platform is designed to streamline the healthcare process,
+          enabling doctors and healthcare providers to manage patient
+          information efficiently and securely. From viewing patient records to
+          scheduling appointments, our MedConnectPro makes it easier to deliver
+          quality care.
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footbar text-white text-center py-3">
+      <p>&copy; 2024 MedConnectPro. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
