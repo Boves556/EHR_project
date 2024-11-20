@@ -164,4 +164,3 @@ function deletePatientDetails() {
   
   // Event listener for the delete button
   document.getElementById("deletePatientInfo").addEventListener("click", deletePatientDetails);
-  

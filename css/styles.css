@@ -28,6 +28,23 @@
 
 /*  =============== GLOBAL STYLES =============== */
 
+html, body {
+  height: 100%; /* Ensure the page takes up full height */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1; /* Push the footer to the bottom */
+}
+
+.footbar {
+  background-color: #343a40; /* Ensure it contrasts with the page */
+  color: white;
+  position: relative;
+}
+
 /* Button Styles */
 .btn-gradient-purple {
   background: linear-gradient(45deg, #6a0dad, #9370db);
@@ -67,7 +84,7 @@
 }
 
 .btn-theme-secondary:hover {
-  background-color: #f0f0f0;
+  background-color: #f0f0f0da;
   color: #6a0dad;
 }
 

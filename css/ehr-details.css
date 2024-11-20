@@ -1,15 +1,8 @@
-
-
-.ehr-image-section img {
-
-  /* height: auto; */
-}
-
 .subtitle-textarea {
   resize: vertical;
   overflow-y: scroll;
   height: auto;
-  min-height: calc(1.5em * 5);
+  min-height: calc(1.5em * 4);
   /* 5 lines high */
 }
 
@@ -18,18 +11,4 @@
   margin-top: 1rem;
 }
 
-.btn {
-  padding: 0.8rem 1.5rem;
-  /* Consistent padding */
-  font-size: 1rem;
-  /* Consistent font size */
-}
 
-/* Ensure both buttons have the same width */
-.btn.w-100 {
-  width: 100%;
-}
-
-.btn-danger.w-100 {
-  width: 100%;
-}
