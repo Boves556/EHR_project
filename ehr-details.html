@@ -338,18 +338,131 @@
         <!-- Main EHR Content -->
         <div class="col-md-9">
           <!-- Dynamic Information Section -->
-          <div class="ehr-section">
-            <h4>Patient Information</h4>
-            <div id="infoContainer">
-              <!-- Dynamic information fields will be added here -->
+          <div class="ehr-section mt-2">
+            <h5 class="form-label fw-bold">PATIENT'S INFORMATION:</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="mobile" class="mt-2 form-label fw-bold"
+                  >Mobile:</label
+                >
+                <textarea id="mobile" class="form-control" required></textarea>
+
+                <label for="otherPhone" class="mt-3 form-label fw-bold"
+                  >Other Phone:</label
+                >
+                <textarea id="otherPhone" class="form-control"></textarea>
+
+                <label for="address" class="mt-3 form-label fw-bold"
+                  >Address:</label
+                >
+                <textarea id="address" class="form-control"></textarea>
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="mt-2 form-label fw-bold"
+                  >Email:</label
+                >
+                <textarea id="email" class="form-control" required></textarea>
+
+                <label for="insuranceNumber" class="mt-3 form-label fw-bold"
+                  >Insurance Number:</label
+                >
+                <textarea id="insuranceNumber" class="form-control"></textarea>
+
+                <label for="postalCode" class="mt-3 form-label fw-bold"
+                  >Postal Code:</label
+                >
+                <textarea id="postalCode" class="form-control"></textarea>
+              </div>
             </div>
-            <button
-              type="button"
-              class="btn btn-gradient-purple mt-3"
-              id="addInfoButton"
+
+            <div class="mt-5">
+              <h6 class="mt-3 form-label fw-bold">PATIENT'S INVOICE:</h6>
+              <label for="billingAddress" class="mt-2 form-label fw-bold"
+                >Billing Address:</label
+              >
+              <textarea id="billingAddress" class="form-control"></textarea>
+
+              <label for="amountToBePaid" class="mt-3 form-label fw-bold"
+                >Amount to be Paid:</label
+              >
+              <textarea id="amountToBePaid" class="form-control"></textarea>
+            </div>
+          </div>
+
+          <!-- Notes Section -->
+          <div class="ehr-section">
+            <h5 class="form-label fw-bold">MEDICAL INFORMATION:</h5>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label for="symptoms" class="mt-2 form-label fw-bold"
+                  >Symptoms:</label
+                >
+                <textarea
+                  id="symptoms"
+                  class="form-control expandable-textarea"
+                ></textarea>
+
+                <label for="maritalStatus" class="form-label fw-bold mt-3"
+                  >Marital Status:</label
+                >
+                <select id="maritalStatus" class="form-select">
+                  <option value="" disabled selected>Select Status</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                </select>
+
+                <label for="diagnosis" class="form-label fw-bold mt-3"
+                  >Diagnosis:</label
+                >
+                <textarea
+                  id="diagnosis"
+                  class="form-control expandable-textarea"
+                ></textarea>
+              </div>
+
+              <div class="col-md-6">
+                <label for="familyHistory" class="mt-2 form-label fw-bold"
+                  >Family History:</label
+                >
+                <textarea
+                  id="familyHistory"
+                  class="form-control expandable-textarea"
+                ></textarea>
+
+                <label for="scanTests" class="form-label fw-bold mt-3"
+                  >Scan Tests:</label
+                >
+                <textarea
+                  id="scanTests"
+                  class="form-control expandable-textarea"
+                ></textarea>
+
+                <label for="medications" class="form-label fw-bold mt-3"
+                  >Medications:</label
+                >
+                <textarea
+                  id="medications"
+                  class="form-control expandable-textarea"
+                ></textarea>
+              </div>
+            </div>
+
+            <label for="labTests" class="form-label fw-bold mt-3"
+              >Lab Tests:</label
             >
-              Add Information
-            </button>
+            <textarea
+              id="labTests"
+              class="form-control expandable-textarea"
+            ></textarea>
+
+            <label for="doctorNotes" class="form-label fw-bold mt-3"
+              >Doctor's Notes:</label
+            >
+            <textarea
+              class="form-control expandable-textarea"
+              id="doctorNotes"
+            ></textarea>
           </div>
 
           <!-- Imaging Section -->
@@ -363,12 +476,6 @@
               <button class="btn btn-gradient-purple">Upload Image</button>
             </div>
           </div>
-
-          <!-- Notes Section -->
-          <div class="ehr-section">
-            <h5 class="mt-2 mb-3">Doctor's Notes</h5>
-            <textarea class="form-control" id="doctorNotes" rows="4"></textarea>
-          </div>
         </div>
       </div>
     </div>
@@ -376,7 +483,7 @@
     <footer class="footbar text-white text-center py-3">
       <p>&copy; 2024 MedConnectPro. All rights reserved.</p>
     </footer>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
@@ -384,3 +491,4 @@
     <script src="js/ehr-details.js"></script>
   </body>
 </html>
+<!-- TODO: work on the image and diagram section, add the ability to add images from local device and upload it online -->

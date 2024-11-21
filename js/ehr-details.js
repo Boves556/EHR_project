@@ -7,39 +7,6 @@ $(document).ready(function () {
   });
 });
 
-// Function to add additional information fields
-function addInformationField() {
-  const infoContainer = document.getElementById("infoContainer");
-
-  const infoRow = document.createElement("div");
-  infoRow.classList.add("mb-4");
-
-  const titleLabel = document.createElement("label");
-  titleLabel.textContent = "Title";
-  const titleInput = document.createElement("input");
-  titleInput.type = "text";
-  titleInput.classList.add("form-control", "mb-2");
-  titleInput.placeholder = "Enter title";
-
-  const subtitleLabel = document.createElement("label");
-  subtitleLabel.textContent = "Subtitle";
-  const subtitleTextarea = document.createElement("textarea");
-  subtitleTextarea.classList.add("form-control", "subtitle-textarea");
-  subtitleTextarea.placeholder = "Enter subtitle information...";
-  subtitleTextarea.rows = 5;
-  subtitleTextarea.style.overflowX = "hidden"; // Prevent horizontal scrolling
-
-  infoRow.appendChild(titleLabel);
-  infoRow.appendChild(titleInput);
-  infoRow.appendChild(subtitleLabel);
-  infoRow.appendChild(subtitleTextarea);
-  infoContainer.appendChild(infoRow);
-}
-
-document
-  .getElementById("addInfoButton")
-  .addEventListener("click", addInformationField);
-
 // Function to load specific patient details
 function loadPatientDetails() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -51,11 +18,12 @@ function loadPatientDetails() {
   const patient = patients[patientIndex];
 
   if (patient) {
+    // Load basic information
     document.getElementById("editPatientName").value =
       patient.firstName + " " + patient.lastName;
     document.getElementById("editAge").value = patient.dob || "";
     document.getElementById("editGender").value = patient.gender;
-    document.getElementById("editCountry").value = patient.country || ""; // Load country value
+    document.getElementById("editCountry").value = patient.country || "";
     document.getElementById("editAppointments").value = patient.appointments
       ? patient.appointments.join("\n")
       : "";
@@ -63,27 +31,18 @@ function loadPatientDetails() {
       patient.appointmentDate || "";
     document.getElementById("doctorNotes").value = patient.doctorNotes || "";
 
-    if (patient.additionalInfo) {
-      patient.additionalInfo.forEach((info) => {
-        const infoRow = document.createElement("div");
-        infoRow.classList.add("mb-4");
-
-        const titleInput = document.createElement("input");
-        titleInput.type = "text";
-        titleInput.classList.add("form-control", "mb-2");
-        titleInput.value = info.title;
-
-        const subtitleTextarea = document.createElement("textarea");
-        subtitleTextarea.classList.add("form-control", "subtitle-textarea");
-        subtitleTextarea.value = info.subtitle;
-        subtitleTextarea.rows = 5;
-        subtitleTextarea.style.overflowX = "hidden";
-
-        infoRow.appendChild(titleInput);
-        infoRow.appendChild(subtitleTextarea);
-        document.getElementById("infoContainer").appendChild(infoRow);
-      });
-    }
+    // Load patient-specific fields
+    document.getElementById("mobile").value = patient.mobile || "";
+    document.getElementById("email").value = patient.email || "";
+    document.getElementById("otherPhone").value = patient.otherPhone || "";
+    document.getElementById("insuranceNumber").value =
+      patient.insuranceNumber || "";
+    document.getElementById("address").value = patient.address || "";
+    document.getElementById("postalCode").value = patient.postalCode || "";
+    document.getElementById("billingAddress").value =
+      patient.billingAddress || "";
+    document.getElementById("amountToBePaid").value =
+      patient.amountToBePaid || "";
   } else {
     alert("No patient information found.");
   }
@@ -107,21 +66,24 @@ function savePatientDetails() {
     patient.lastName = lastName.join(" ");
     patient.dob = document.getElementById("editAge").value;
     patient.gender = document.getElementById("editGender").value;
-    patient.country = document.getElementById("editCountry").value; // Save country value
+    patient.country = document.getElementById("editCountry").value;
     patient.appointments = document
       .getElementById("editAppointments")
       .value.split("\n");
     patient.appointmentDate = document.getElementById("appointmentDate").value;
     patient.doctorNotes = document.getElementById("doctorNotes").value;
 
-    const additionalInfo = [];
-    document.querySelectorAll("#infoContainer > div").forEach((infoRow) => {
-      const title = infoRow.querySelector("input").value;
-      const subtitle = infoRow.querySelector("textarea").value;
-      additionalInfo.push({ title, subtitle });
-    });
-    patient.additionalInfo = additionalInfo;
+    // Save updated patient-specific fields
+    patient.mobile = document.getElementById("mobile").value;
+    patient.email = document.getElementById("email").value;
+    patient.otherPhone = document.getElementById("otherPhone").value;
+    patient.insuranceNumber = document.getElementById("insuranceNumber").value;
+    patient.address = document.getElementById("address").value;
+    patient.postalCode = document.getElementById("postalCode").value;
+    patient.billingAddress = document.getElementById("billingAddress").value;
+    patient.amountToBePaid = document.getElementById("amountToBePaid").value;
 
+    // Save updated data to localStorage
     localStorage.setItem(
       "patients_" + loggedInDoctor.email,
       JSON.stringify(patients)
@@ -130,37 +92,97 @@ function savePatientDetails() {
   }
 }
 
+// Event listener for the Save button
 document
   .getElementById("savePatientInfo")
   .addEventListener("click", savePatientDetails);
 
-window.onload = loadPatientDetails;
-
 // Function to delete patient details
 function deletePatientDetails() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const patientIndex = urlParams.get("patient");
-  
-    // Get logged-in doctor's patients list
-    const loggedInDoctor = JSON.parse(localStorage.getItem("logged_in_doctor"));
-    const patientsKey = "patients_" + loggedInDoctor.email;
-    const patients = JSON.parse(localStorage.getItem(patientsKey)) || [];
-  
-    if (patients[patientIndex]) {
-      // Confirm deletion
-      const isConfirmed = confirm("Are you sure you want to delete this patient?");
-      if (isConfirmed) {
-        // Remove the patient from the array and update localStorage
-        patients.splice(patientIndex, 1);
-        localStorage.setItem(patientsKey, JSON.stringify(patients));
-  
-        alert("Patient information has been deleted.");
-        window.location.href = "patients.html"; // Redirect to the patient list page
-      }
-    } else {
-      alert("Patient information not found.");
+  const urlParams = new URLSearchParams(window.location.search);
+  const patientIndex = urlParams.get("patient");
+
+  const loggedInDoctor = JSON.parse(localStorage.getItem("logged_in_doctor"));
+  const patientsKey = "patients_" + loggedInDoctor.email;
+  const patients = JSON.parse(localStorage.getItem(patientsKey)) || [];
+
+  if (patients[patientIndex]) {
+    const isConfirmed = confirm(
+      "Are you sure you want to delete this patient?"
+    );
+    if (isConfirmed) {
+      patients.splice(patientIndex, 1);
+      localStorage.setItem(patientsKey, JSON.stringify(patients));
+      alert("Patient information has been deleted.");
+      window.location.href = "patients.html"; // Redirect to the patient list page
     }
+  } else {
+    alert("Patient information not found.");
   }
-  
-  // Event listener for the delete button
-  document.getElementById("deletePatientInfo").addEventListener("click", deletePatientDetails);
+}
+
+// Event listener for the Delete button
+document
+  .getElementById("deletePatientInfo")
+  .addEventListener("click", deletePatientDetails);
+
+// Apply specific behavior for textboxes based on field type
+
+// Horizontal input fields for specific fields
+const horizontalFields = [
+  "mobile",
+  "email",
+  "otherPhone",
+  "insuranceNumber",
+  "address",
+  "postalCode",
+  "billingAddress",
+  "amountToBePaid",
+];
+horizontalFields.forEach((id) => {
+  const field = document.getElementById(id);
+  if (field) {
+    field.setAttribute("rows", "1");
+    field.style.height = "auto";
+    field.style.overflow = "hidden";
+    field.style.resize = "none"; // Disable resizing
+    field.style.whiteSpace = "nowrap"; // Prevent line breaks
+    field.style.textOverflow = "ellipsis"; // Handle overflow with ellipsis
+    field.addEventListener("input", function () {
+      this.value = this.value.replace(/\n/g, ""); // Prevent new lines
+    });
+  }
+});
+
+// Expandable vertical fields for medical notes
+const expandableFields = [
+  "symptoms",
+  "familyHistory",
+  "scanTests",
+  "diagnosis",
+  "medications",
+  "labTests",
+];
+expandableFields.forEach((id) => {
+  const field = document.getElementById(id);
+  if (field) {
+    field.setAttribute("rows", "1");
+    field.style.height = "auto";
+    field.style.overflowY = "hidden";
+    field.style.resize = "none"; // Disable manual resizing
+    field.addEventListener("input", function () {
+      this.style.height = "auto"; // Reset height to calculate proper size
+      const scrollHeight = this.scrollHeight; // Get full scroll height
+      const maxRowsHeight = 3 * parseFloat(getComputedStyle(this).lineHeight); // Height for 3 rows
+      if (scrollHeight > maxRowsHeight) {
+        this.style.height = maxRowsHeight + "px"; // Limit height to 3 rows
+        this.style.overflowY = "scroll"; // Enable scrolling for extra content
+      } else {
+        this.style.height = scrollHeight + "px"; // Adjust height to content
+        this.style.overflowY = "hidden"; // Hide scroll if no overflow
+      }
+    });
+  }
+});
+
+window.onload = loadPatientDetails;
