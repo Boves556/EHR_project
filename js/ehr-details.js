@@ -185,4 +185,50 @@ expandableFields.forEach((id) => {
   }
 });
 
+// Initialize image management functionality
+document.addEventListener("DOMContentLoaded", function () {
+  const imageContainer = document.getElementById("imageContainer");
+  const uploadImageInput = document.getElementById("uploadImageInput");
+
+  // Function to handle image uploads
+  uploadImageInput.addEventListener("change", function () {
+    const files = Array.from(this.files); // Convert FileList to an array
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        addImageToContainer(e.target.result); // Add uploaded image
+      };
+      reader.readAsDataURL(file); // Read file as Data URL
+    });
+
+    // Clear the input value to allow re-uploading the same file
+    this.value = "";
+  });
+
+  // Function to add an image to the container
+  function addImageToContainer(imageSrc) {
+    const imageWrapper = document.createElement("div");
+    imageWrapper.className = "position-relative";
+
+    const img = document.createElement("img");
+    img.src = imageSrc;
+    img.alt = "Uploaded Image";
+    img.className = "img-thumbnail";
+    img.style.width = "600px";
+
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "btn btn-danger btn-sm position-absolute";
+    deleteButton.style.top = "5px";
+    deleteButton.style.right = "5px";
+    deleteButton.innerHTML = "&times;";
+    deleteButton.addEventListener("click", function () {
+      imageWrapper.remove(); // Remove specific image
+    });
+
+    imageWrapper.appendChild(img);
+    imageWrapper.appendChild(deleteButton);
+    imageContainer.appendChild(imageWrapper);
+  }
+});
+
 window.onload = loadPatientDetails;

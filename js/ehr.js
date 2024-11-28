@@ -34,3 +34,5 @@ $(document).ready(function () {
       }
     });
 });
+
+// TODO: make this page to redirect to ehr-details instead of patients page
