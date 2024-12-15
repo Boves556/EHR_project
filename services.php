@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us - MedConnectPro</title>
+    <title>Services - MedConnectPro</title>
     <link rel="icon" href="img/logo.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
@@ -18,7 +18,7 @@
       <div class="container-fluid">
         <!-- Brand Logo -->
         <div>
-          <a class="navbar-brand" href="index.html"
+          <a class="navbar-brand" href="index.php"
             ><img src="img/logo_main.png" alt="Logo"
           /></a>
         </div>
@@ -38,16 +38,16 @@
           <div class="mx-auto">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="about.html">About Us</a>
+                <a class="nav-link" href="about.php">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="services.html">Services</a>
+                <a class="nav-link" href="services.php">Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="news.html">News</a>
+                <a class="nav-link" href="news.php">News</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
+                <a class="nav-link" href="contact.php">Contact</a>
               </li>
             </ul>
           </div>
@@ -56,10 +56,10 @@
           <div>
             <ul class="navbar-nav ms-auto gap-1">
               <li class="nav-item">
-                <a class="btn btn-theme-secondary" href="login.html">Login</a>
+                <a class="btn btn-theme-secondary" href="login.php">Login</a>
               </li>
               <li class="nav-item">
-                <a class="btn btn-theme-primary" href="register.html"
+                <a class="btn btn-theme-primary" href="register.php"
                   >Register</a
                 >
               </li>
@@ -70,7 +70,7 @@
     </nav>
 
     <div class="container">
-      <!-- about us section -->
+      <!-- services section -->
     </div>
 
     <!-- Footer -->

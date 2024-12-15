@@ -98,7 +98,7 @@ body {
 
 /* Hero Section */
 .hero {
-  background-image: url("/img/docpat.jpg");
+  background-image: url("../img/docpat.jpg");
   background-size: cover;
   background-position: 50% 35%;
   background-repeat: no-repeat;

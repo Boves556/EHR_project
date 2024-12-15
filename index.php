@@ -18,7 +18,7 @@
       <div class="container-fluid">
         <!-- Brand Logo -->
         <div>
-          <a class="navbar-brand" href="index.html"
+          <a class="navbar-brand" href="index.php"
             ><img src="img/logo_main.png" alt="Logo"
           /></a>
         </div>
@@ -38,16 +38,16 @@
           <div class="mx-auto">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="about.html">About Us</a>
+                <a class="nav-link" href="about.php">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="services.html">Services</a>
+                <a class="nav-link" href="services.php">Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="news.html">News</a>
+                <a class="nav-link" href="news.php">News</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
+                <a class="nav-link" href="contact.php">Contact</a>
               </li>
             </ul>
           </div>
@@ -56,10 +56,10 @@
           <div>
             <ul class="navbar-nav ms-auto gap-1">
               <li class="nav-item">
-                <a class="btn btn-theme-secondary" href="login.html">Login</a>
+                <a class="btn btn-theme-secondary" href="login.php">Login</a>
               </li>
               <li class="nav-item">
-                <a class="btn btn-theme-primary" href="register.html"
+                <a class="btn btn-theme-primary" href="register.php"
                   >Register</a
                 >
               </li>
@@ -78,7 +78,7 @@
         <p class="lead hero-subheading">
           Bringing Simplicity to Complex Healthcare Needs
         </p>
-        <a href="services.html" class="btn btn-gradient-purple btn-lg mt-4 mb-5"
+        <a href="services.php" class="btn btn-gradient-purple btn-lg mt-4 mb-5"
           >Book an Appointment</a
         >
       </div>
@@ -190,7 +190,7 @@
                 <p class="card-text">
                   Stay informed with the latest developments in MedConnectPro.
                 </p>
-                <a href="news.html" class="btn btn-gradient-purple"
+                <a href="news.php" class="btn btn-gradient-purple"
                   >Read More</a
                 >
               </div>
@@ -208,7 +208,7 @@
                 <p class="card-text">
                   Learn how we're advancing healthcare solutions globally.
                 </p>
-                <a href="news.html" class="btn btn-gradient-purple"
+                <a href="news.php" class="btn btn-gradient-purple"
                   >Read More</a
                 >
               </div>
@@ -226,7 +226,7 @@
                 <p class="card-text">
                   Explore key milestones that showcase our impact.
                 </p>
-                <a href="news.html" class="btn btn-gradient-purple"
+                <a href="news.php" class="btn btn-gradient-purple"
                   >Read More</a
                 >
               </div>
