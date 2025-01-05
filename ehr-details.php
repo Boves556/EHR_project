@@ -4,68 +4,83 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     header("Location: login.php");
     exit;
 }
+
 include 'db_connection.php';
 
 $doctor_id = $_SESSION['doctor_id'];
 
-// Get ehr_id from URL
-$ehr_id = isset($_GET['ehr_id']) ? (int)$_GET['ehr_id'] : 0;
+// Validate and sanitize EHR ID
+$ehr_id = isset($_GET['ehr_id']) ? filter_var($_GET['ehr_id'], FILTER_VALIDATE_INT) : 0;
 if ($ehr_id <= 0) {
     echo "Invalid EHR ID.";
     exit;
 }
 
+// Helper functions for date conversion and input validation
+function toDate($d) {
+    if (empty($d)) return NULL;
+    $parts = explode('-', $d);
+    if (count($parts) === 3) {
+        return $parts[2] . '-' . $parts[1] . '-' . $parts[0];
+    }
+    return NULL;
+}
+
+function isValidDate($date, $format = 'd-m-Y') {
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) === $date;
+}
+
+function decodeText($text) {
+    return htmlspecialchars(stripslashes($text), ENT_QUOTES);
+}
+
 // Handle Save Changes (Update) via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save') {
-    // Convert dates back to YYYY-MM-DD where needed
-    function toDate($d) {
-        if (empty($d)) return NULL;
-        $parts = explode('-', $d);
-        if (count($parts) === 3) {
-            return $parts[2].'-'.$parts[1].'-'.$parts[0];
-        }
-        return NULL;
-    }
-
     $patientName = $conn->real_escape_string($_POST['patientName']);
-    $dobInput = $_POST['dob']; // dd-mm-yyyy
-    $dobFormatted = toDate($dobInput);
+    $dobInput = $_POST['dob'];
+    $dobFormatted = isValidDate($dobInput) ? toDate($dobInput) : NULL;
     $gender = $conn->real_escape_string($_POST['gender']);
     $country = $conn->real_escape_string($_POST['country']);
-    $appointmentDateInput = $_POST['appointmentDate']; // dd-mm-yyyy
-    $appointmentDateFormatted = toDate($appointmentDateInput);
-    $appointmentNotes = $conn->real_escape_string($_POST['appointmentNotes']);
-    $mobile = $conn->real_escape_string($_POST['mobile']);
-    $email = $conn->real_escape_string($_POST['email']);
-    $otherPhone = $conn->real_escape_string($_POST['otherPhone']);
+    $appointmentDateInput = $_POST['appointmentDate'];
+    $appointmentDateFormatted = isValidDate($appointmentDateInput) ? toDate($appointmentDateInput) : NULL;
+    $appointmentNotes = str_replace("\r\n", "\n", $conn->real_escape_string($_POST['appointmentNotes']));
+    $mobile = filter_var($_POST['mobile'], FILTER_SANITIZE_NUMBER_INT);
+    $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+    $otherPhone = filter_var($_POST['otherPhone'], FILTER_SANITIZE_NUMBER_INT);
     $insuranceNumber = $conn->real_escape_string($_POST['insuranceNumber']);
     $address = $conn->real_escape_string($_POST['address']);
     $postalCode = $conn->real_escape_string($_POST['postalCode']);
     $billingAddress = $conn->real_escape_string($_POST['billingAddress']);
     $amountToBePaid = floatval($_POST['amountToBePaid']);
-    $symptoms = $conn->real_escape_string($_POST['symptoms']);
+    $symptoms = str_replace("\r\n", "\n", $conn->real_escape_string($_POST['symptoms']));
     $maritalStatus = $conn->real_escape_string($_POST['maritalStatus']);
-    $diagnosis = $conn->real_escape_string($_POST['diagnosis']);
-    $familyHistory = $conn->real_escape_string($_POST['familyHistory']);
-    $scanTests = $conn->real_escape_string($_POST['scanTests']);
-    $medications = $conn->real_escape_string($_POST['medications']);
-    $labTests = $conn->real_escape_string($_POST['labTests']);
-    $doctorNotes = $conn->real_escape_string($_POST['doctorNotes']);
+    $diagnosis = str_replace("\r\n", "\n", $conn->real_escape_string($_POST['diagnosis']));
+    $familyHistory = str_replace("\r\n", "\n", $conn->real_escape_string($_POST['familyHistory']));
+    $scanTests = str_replace("\r\n", "\n", $conn->real_escape_string($_POST['scanTests']));
+    $medications = str_replace("\r\n", "\n", $conn->real_escape_string($_POST['medications']));
+    $labTests = str_replace("\r\n", "\n", $conn->real_escape_string($_POST['labTests']));
+    $doctorNotes = str_replace("\r\n", "\n", $conn->real_escape_string($_POST['doctorNotes']));
 
     $stmt = $conn->prepare("UPDATE patient_ehr SET 
-        patient_name=?, dob=?, gender=?, country=?, appointment_date=?, appointment_notes=?, mobile=?, email=?, other_phone=?, address=?, insurance_number=?, postal_code=?, billing_address=?, amount_to_be_paid=?, symptoms=?, marital_status=?, diagnosis=?, family_history=?, scan_tests=?, medications=?, lab_tests=?, doctor_notes=?
-        WHERE ehr_id=? AND doctor_id=?");
-    $stmt->bind_param("sssssssssssssssssssssdii",
-    $patientName, $dobFormatted, $gender, $country, $appointmentDateFormatted, $appointmentNotes,
-    $mobile, $email, $otherPhone, $address, $insuranceNumber, $postalCode, $billingAddress,
-    $amountToBePaid, $symptoms, $maritalStatus, $diagnosis, $familyHistory, $scanTests, $medications,
-    $labTests, $doctorNotes, $ehr_id, $doctor_id
-);
+        patient_name=?, dob=?, gender=?, country=?, appointment_date=?, appointment_notes=?, mobile=?, email=?, 
+        other_phone=?, address=?, insurance_number=?, postal_code=?, billing_address=?, amount_to_be_paid=?, 
+        symptoms=?, marital_status=?, diagnosis=?, family_history=?, scan_tests=?, medications=?, lab_tests=?, 
+        doctor_notes=? WHERE ehr_id=? AND doctor_id=?");
+
+    $stmt->bind_param(
+        "sssssssssssssssssssssdii",
+        $patientName, $dobFormatted, $gender, $country, $appointmentDateFormatted, $appointmentNotes,
+        $mobile, $email, $otherPhone, $address, $insuranceNumber, $postalCode, $billingAddress, $amountToBePaid,
+        $symptoms, $maritalStatus, $diagnosis, $familyHistory, $scanTests, $medications, $labTests, $doctorNotes,
+        $ehr_id, $doctor_id
+    );
 
     if ($stmt->execute()) {
         $successMessage = "All patient information updated successfully!";
     } else {
-        $errorMessage = "Error updating patient: " . $conn->error;
+        error_log("Error updating patient record: " . $conn->error);
+        $errorMessage = "An error occurred while updating the patient record. Please try again.";
     }
 }
 
@@ -77,7 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         header("Location: patients.php");
         exit;
     } else {
-        $errorMessage = "Error deleting patient: " . $conn->error;
+        error_log("Error deleting patient record: " . $conn->error);
+        $errorMessage = "An error occurred while deleting the patient record.";
     }
 }
 
@@ -92,23 +108,91 @@ if (!$patient) {
     exit;
 }
 
+// Decode and prepare text fields for display
+$decodedSymptoms = decodeText($patient['symptoms']);
+$decodedFamilyHistory = decodeText($patient['family_history']);
+$decodedScanTests = decodeText($patient['scan_tests']);
+$decodedDiagnosis = decodeText($patient['diagnosis']);
+$decodedMedications = decodeText($patient['medications']);
+$decodedLabTests = decodeText($patient['lab_tests']);
+$decodedDoctorNotes = decodeText($patient['doctor_notes']);
+
 // Convert dates for display
 function displayDate($d) {
     if (empty($d) || $d === '0000-00-00') return '';
     $parts = explode('-', $d);
-    return $parts[2].'-'.$parts[1].'-'.$parts[0];
+    return $parts[2] . '-' . $parts[1] . '-' . $parts[0];
 }
 
 $displayDob = displayDate($patient['dob']);
 $displayAppointmentDate = displayDate($patient['appointment_date']);
 
-// Split name
-$nameParts = explode(' ', $patient['patient_name'], 2);
-$patientFirstName = $nameParts[0];
-$patientLastName = isset($nameParts[1]) ? $nameParts[1] : '';
-$patientFullName = $patient['patient_name'];
-?>
+// Fetch images (using the image_data column)
+$stmt = $conn->prepare("SELECT image_id, image_path, image_data FROM ehr_images WHERE ehr_id=? AND doctor_id=?");
+$stmt->bind_param("ii", $ehr_id, $doctor_id);
+$stmt->execute();
+$images_result = $stmt->get_result();
+$images = $images_result->fetch_all(MYSQLI_ASSOC);
 
+// Handle Upload and Delete image requests
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    if ($_POST['action'] === 'upload_image') {
+        $uploadedFiles = $_FILES['images'];
+        $success = true;
+        $uploadedData = [];
+
+        foreach ($uploadedFiles['tmp_name'] as $key => $tmpName) {
+            $fileType = mime_content_type($tmpName);
+            if (!in_array($fileType, ['image/jpeg', 'image/png'])) {
+                echo json_encode(['success' => false, 'error' => 'Invalid file type.']);
+                exit;
+            }
+            if ($uploadedFiles['size'][$key] > 2 * 1024 * 1024) {
+                echo json_encode(['success' => false, 'error' => 'File size exceeds 2MB limit.']);
+                exit;
+            }
+
+            $fileName = basename($uploadedFiles['name'][$key]);
+            $fileData = @file_get_contents($tmpName);
+            if ($fileData === false) {
+                $success = false;
+                break;
+            }
+
+            $stmt = $conn->prepare("
+                INSERT INTO ehr_images (ehr_id, doctor_id, image_path, image_data)
+                VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("iisb", $ehr_id, $doctor_id, $fileName, $fileData);
+
+            if (!$stmt->execute()) {
+                $success = false;
+                break;
+            }
+
+            $uploadedData[] = [
+                'imageId' => $stmt->insert_id,
+                'base64' => base64_encode($fileData),
+                'fileName' => $fileName
+            ];
+        }
+
+        echo json_encode(['success' => $success, 'uploadedData' => $uploadedData]);
+        exit;
+    }
+
+    if ($_POST['action'] === 'delete_image') {
+        $imageId = (int)$_POST['image_id'];
+        $stmt = $conn->prepare("DELETE FROM ehr_images WHERE image_id=? AND doctor_id=?");
+        $stmt->bind_param("ii", $imageId, $doctor_id);
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'error' => $stmt->error]);
+        }
+        exit;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -134,14 +218,16 @@ $patientFullName = $patient['patient_name'];
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav" id="navbarLinks">
-                    <!-- Patient list link and dashboard link will be dynamically added by JavaScript when logged in -->
+                    <li class="nav-item"><a class="nav-link" href="doctor-dashboard.php">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="patients.php">Your Patients</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ehr.php">New Patient</a></li>
                 </ul>
-                <a href="index.php" id="loginLogoutButton" class="btn btn-theme-primary ms-auto">Logout</a>
+                <a href="index.php" id="loginLogoutButton" class="btn btn-danger ms-auto">Logout</a>
             </div>
         </div>
     </nav>
 
-    <form id="patientInfoForm" method="POST" action="">
+    <form id="patientInfoForm" method="POST" action="" enctype="multipart/form-data">
         <input type="hidden" name="action" value="" id="formAction" />
         <div class="container-fluid">
             <div class="row">
@@ -156,7 +242,7 @@ $patientFullName = $patient['patient_name'];
                     <div class="mb-3">
                         <label for="editPatientName" class="form-label fw-bold"><strong>Name:</strong></label>
                         <input type="text" class="form-control" id="editPatientName" name="patientName"
-                            value="<?php echo htmlspecialchars($patientFullName); ?>" />
+                            value="<?php echo htmlspecialchars($patient['patient_name'], ENT_QUOTES); ?>" />
                     </div>
                     <div class="mb-3">
                         <label for="editAge" class="form-label fw-bold"><strong>Date of Birth:</strong></label>
@@ -469,7 +555,7 @@ $patientFullName = $patient['patient_name'];
                             <div class="col-md-6">
                                 <label for="symptoms" class="mt-2 form-label fw-bold">Symptoms:</label>
                                 <textarea id="symptoms" class="form-control expandable-textarea"
-                                    name="symptoms"><?php echo htmlspecialchars($patient['symptoms']); ?></textarea>
+                                    name="symptoms"><?php echo htmlspecialchars($decodedSymptoms); ?></textarea>
 
                                 <label for="maritalStatus" class="form-label fw-bold mt-3">Marital Status:</label>
                                 <select id="maritalStatus" class="form-select" name="maritalStatus">
@@ -486,38 +572,60 @@ $patientFullName = $patient['patient_name'];
 
                                 <label for="diagnosis" class="form-label fw-bold mt-3">Diagnosis:</label>
                                 <textarea id="diagnosis" class="form-control expandable-textarea"
-                                    name="diagnosis"><?php echo htmlspecialchars($patient['diagnosis']); ?></textarea>
+                                    name="diagnosis"><?php echo htmlspecialchars($decodedDiagnosis); ?></textarea>
                             </div>
                             <div class="col-md-6">
                                 <label for="familyHistory" class="mt-2 form-label fw-bold">Family History:</label>
                                 <textarea id="familyHistory" class="form-control expandable-textarea"
-                                    name="familyHistory"><?php echo htmlspecialchars($patient['family_history']); ?></textarea>
+                                    name="familyHistory"><?php echo htmlspecialchars($decodedFamilyHistory); ?></textarea>
 
                                 <label for="scanTests" class="form-label fw-bold mt-3">Scan Tests:</label>
                                 <textarea id="scanTests" class="form-control expandable-textarea"
-                                    name="scanTests"><?php echo htmlspecialchars($patient['scan_tests']); ?></textarea>
+                                    name="scanTests"><?php echo htmlspecialchars($decodedScanTests); ?></textarea>
 
                                 <label for="medications" class="form-label fw-bold mt-3">Medications:</label>
                                 <textarea id="medications" class="form-control expandable-textarea"
-                                    name="medications"><?php echo htmlspecialchars($patient['medications']); ?></textarea>
+                                    name="medications"><?php echo htmlspecialchars($decodedMedications); ?></textarea>
                             </div>
                         </div>
 
                         <label for="labTests" class="form-label fw-bold mt-3">Lab Tests:</label>
                         <textarea id="labTests" class="form-control expandable-textarea"
-                            name="labTests"><?php echo htmlspecialchars($patient['lab_tests']); ?></textarea>
+                            name="labTests"><?php echo htmlspecialchars($decodedLabTests); ?></textarea>
 
                         <label for="doctorNotes" class="form-label fw-bold mt-3">Doctor's Notes:</label>
-                        <textarea class="form-control expandable-textarea" id="doctorNotes"
-                            name="doctorNotes"><?php echo htmlspecialchars($patient['doctor_notes']); ?></textarea>
+                        <textarea class="form-control expandable-textarea" id="doctorNotes" name="doctorNotes"
+                            rows="5"><?php echo htmlspecialchars($decodedDoctorNotes); ?></textarea>
                     </div>
 
                     <div class="ehr-section text-center" id="imagingSection">
                         <h5 class="mt-2 mb-3">Imaging & Diagrams</h5>
-                        <div id="imageContainer" class="d-flex flex-wrap justify-content-center gap-3"></div>
+                        <div id="imageContainer" class="d-flex flex-wrap justify-content-center gap-3">
+                            <?php if (!empty($images)): ?>
+                            <?php foreach ($images as $image): ?>
+                            <?php
+                                    // Convert the BLOB to base64 so we can display it directly in the <img>
+                                    $encodedImage = base64_encode($image['image_data']);
+                                ?>
+                            <div class="position-relative">
+                                <img src="data:image/jpeg;base64,<?php echo $encodedImage; ?>"
+                                    alt="<?php echo htmlspecialchars($image['image_path']); ?>" class="img-thumbnail"
+                                    style="width: 500px;">
+                                <button type="button" class="btn btn-danger btn-sm position-absolute"
+                                    style="top: 5px; right: 5px;"
+                                    onclick="deleteImage(<?php echo $image['image_id']; ?>)">
+                                    ×
+                                </button>
+                            </div>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                            <p>No images uploaded yet.</p>
+                            <?php endif; ?>
+                        </div>
                         <div class="mt-3 mb-2">
-                            <input type="file" id="uploadImageInput" class="d-none" accept="image/*" multiple />
-                            <button class="btn btn-gradient-purple"
+                            <input type="file" id="uploadImageInput" name="images[]" class="d-none" accept="image/*"
+                                multiple />
+                            <button type="button" class="btn btn-gradient-purple"
                                 onclick="document.getElementById('uploadImageInput').click()">
                                 Upload Images
                             </button>

@@ -12,7 +12,7 @@ function handleLoginLogoutButton() {
   if (!loginLogoutButton || !navbarLinks) return;
 
   // Fetch login status from the backend
-  fetch("check_login.php")
+  fetch("login.php")
     .then((response) => response.json())
     .then((data) => {
       if (data.loggedIn && data.loggedInDoctor) {
@@ -81,53 +81,4 @@ function handleLogout(event) {
       }
     })
     .catch((error) => console.error("Error during logout:", error));
-}
-
-// Fetch and Display Patient Statistics
-function fetchPatientStatistics() {
-  const patientCountElement = document.getElementById("patientCount");
-
-  if (patientCountElement) {
-    fetch("get_patient_statistics.php")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          patientCountElement.innerText = data.patientCount || "0";
-        } else {
-          patientCountElement.innerText = "Error loading statistics.";
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching statistics:", error);
-        patientCountElement.innerText = "Error.";
-      });
-  }
-}
-
-// Display EHR Details
-function displayEHRDetails() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const patientIndex = urlParams.get("patient");
-
-  if (patientIndex) {
-    // Fetch the patient details from the backend
-    fetch(`get_patient_details.php?patient=${patientIndex}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success && data.patient) {
-          const patient = data.patient;
-
-          document.getElementById(
-            "patientName"
-          ).innerText = `${patient.firstName} ${patient.lastName}`;
-          document.getElementById("patientDob").innerText = patient.dob;
-          document.getElementById("patientGender").innerText = patient.gender;
-          document.getElementById("patientCountry").innerText =
-            patient.country || "N/A";
-        }
-      })
-      .catch((error) =>
-        console.error("Error fetching patient details:", error)
-      );
-  }
 }

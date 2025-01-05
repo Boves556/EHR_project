@@ -62,9 +62,10 @@ $patientsJson = json_encode($patients);
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav" id="navbarLinks">
-                    <!-- Patient list link and dashboard link will be dynamically added by JavaScript when logged in -->
+                    <li class="nav-item"><a class="nav-link" href="doctor-dashboard.php">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ehr.php">New Patient</a></li>
                 </ul>
-                <a href="index.php" id="loginLogoutButton" class="btn btn-theme-primary ms-auto">Login</a>
+                <a href="index.php" id="loginLogoutButton" class="btn btn-danger ms-auto">Logout</a>
             </div>
         </div>
     </nav>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us - MedConnectPro</title>
-    <link rel="icon" href="img/logo.png" />
+    <link rel="icon" href="img/logo.jpg" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -56,8 +56,115 @@
         </div>
     </nav>
 
-    <div class="container">
-        <!-- about us section -->
+    <div class="container my-5">
+        <h1 class="text-center hero-subheading mb-4">About MedConnectPro</h1>
+        <p class="text-center lead mb-5">
+            Redefining healthcare with cutting-edge Electronic Health Record (EHR) solutions designed for seamless
+            integration and optimal patient care.
+        </p>
+
+        <!-- Introduction Section -->
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6">
+                <img src="img/ehr_intro.jpg" alt="EHR Overview" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h3 class="hero-subheading mb-3">Our Mission</h3>
+                <p class="text-muted">
+                    At MedConnectPro, our mission is to empower healthcare providers with intuitive and reliable tools
+                    to deliver exceptional care. We aim to simplify the complexities of managing patient records through
+                    innovation, security, and efficiency.
+                </p>
+                <p class="text-muted">
+                    From small clinics to large hospitals, our EHR platform ensures every patient interaction is backed
+                    by accurate and accessible data.
+                </p>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="py-5 bg-light rounded">
+            <h2 class="text-center mb-4 hero-subheading">Our Features</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold hero-subheading">Unmatched Security</h5>
+                    <p class="text-muted">Top-tier encryption to safeguard sensitive patient information.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold hero-subheading">Intuitive Interface</h5>
+                    <p class="text-muted">Designed for ease of use, enabling smooth adoption by all healthcare staff.
+                    </p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold hero-subheading">Reliable Performance</h5>
+                    <p class="text-muted">24/7 availability with robust infrastructure for uninterrupted service.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us Section -->
+        <div class="row align-items-center my-5">
+            <div class="col-md-6 order-md-2">
+                <img src="img/ehr_benefits.jpg" alt="Why Choose Us" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h3 class="hero-subheading mb-3">Why Choose MedConnectPro?</h3>
+                <ul class="list-unstyled text-muted">
+                    <li class="mb-3">
+                        <i class="bi bi-check-circle-fill hero-subheading"></i> Streamline patient record management for
+                        improved efficiency.
+                    </li>
+                    <li class="mb-3">
+                        <i class="bi bi-check-circle-fill hero-subheading"></i> Real-time access to critical patient
+                        data
+                        for informed decisions.
+                    </li>
+                    <li class="mb-3">
+                        <i class="bi bi-check-circle-fill hero-subheading"></i> Seamless integration with existing
+                        healthcare systems.
+                    </li>
+                    <li class="mb-3">
+                        <i class="bi bi-check-circle-fill hero-subheading"></i> Comprehensive support and training for a
+                        smooth transition.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <!-- <div class="py-5 bg-light rounded">
+            <h2 class="text-center mb-4 hero-subheading">Meet Our Team</h2>
+            <p class="text-center text-muted mb-5">
+                Our team is composed of passionate professionals dedicated to enhancing healthcare through technology.
+            </p>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <img src="img/team_member_1.jpg" alt="Team Member" class="rounded-circle mb-3 shadow"
+                        style="width: 150px;">
+                    <h5 class=" ">Dr. Sarah Johnson</h5>
+                    <p class="text-muted">Chief Medical Officer</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="img/team_member_2.jpg" alt="Team Member" class="rounded-circle mb-3 shadow"
+                        style="width: 150px;">
+                    <h5 class=" ">Michael Adams</h5>
+                    <p class="text-muted">Head of Technology</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="img/team_member_3.jpg" alt="Team Member" class="rounded-circle mb-3 shadow"
+                        style="width: 150px;">
+                    <h5 class=" ">Emily Carter</h5>
+                    <p class="text-muted">Product Manager</p>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Call to Action -->
+        <div class="text-center py-5 rounded bg-primary text-white">
+            <h3 class="  mb-3">Join the Revolution in Healthcare</h3>
+            <p class="lead">Discover the MedConnectPro difference and experience the future of healthcare today.</p>
+            <a href="register.php" class="btn btn-light btn-lg">Get Started</a>
+        </div>
     </div>
 
     <!-- Footer -->
