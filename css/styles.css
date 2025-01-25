@@ -29,18 +29,18 @@
 
 html,
 body {
-  height: 100%; /* Ensure the page takes up full height */
+  height: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
 }
 
 .container {
-  flex: 1; /* Push the footer to the bottom */
+  flex: 1;
 }
 
 .footbar {
-  background-color: #343a40; /* Ensure it contrasts with the page */
+  background-color: #343a40;
   color: white;
   position: relative;
 }
@@ -120,17 +120,16 @@ body {
   text-shadow: 0 2px 3px rgb(186, 152, 247);
 }
 
-/* Achievement segment */
 .achievement-card {
-  background-color: #f8f9fa; /* Light background for each card */
+  background-color: #f8f9fa;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 
 .achievement-card:hover {
-  transform: scale(1.05); /* Slight zoom effect on hover */
+  transform: scale(1.05);
 }
 
 .achievement-card h3 {
@@ -163,13 +162,13 @@ body {
 /*  =============== PATIENT DETAILS PAGE (EHR) =============== */
 
 .patient-sidebar {
-  position: sticky; /* Makes the sidebar stick to the viewport */
-  top: 0; /* Keeps it at the top of the viewport */
-  height: 100vh; /* Full viewport height */
-  overflow-y: auto; /* Enables scrolling within the sidebar */
-  background-color: #f8f9fa; /* Keeps the light background */
-  padding: 1rem; /* Keeps the spacing consistent */
-  border-right: 1px solid #e3e3e3; /* Adds a subtle border */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-right: 1px solid #e3e3e3;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 

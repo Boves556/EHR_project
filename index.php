@@ -11,10 +11,8 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <!-- Brand Logo -->
             <div>
                 <a class="navbar-brand" href="index.php"><img src="img/logo_main.png" alt="Logo" /></a>
             </div>
@@ -23,7 +21,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Left-aligned links closer to the brand logo -->
                 <div class="mx-auto">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -41,7 +38,6 @@
                     </ul>
                 </div>
 
-                <!-- Right-aligned Login and Register buttons -->
                 <div>
                     <ul class="navbar-nav ms-auto gap-1">
                         <li class="nav-item">
@@ -56,7 +52,6 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <header class="text-center py-5 bg-light hero">
         <div class="container mt-5">
             <h1 class="display-4 hero-heading mb-2">
@@ -73,7 +68,6 @@
         <div class="row text-center mt-5 mb-5">
             <h2 class="mb-5">Our Key Services</h2>
 
-            <!-- Patient Management Feature -->
             <div class="col-md-4">
                 <div class="card">
                     <img src="img/patient.jpg" class="card-img-top" alt="Patient Management" />
@@ -87,7 +81,6 @@
                 </div>
             </div>
 
-            <!-- Appointment Scheduling Feature -->
             <div class="col-md-4">
                 <div class="card">
                     <img src="img/appointment.jpg" class="card-img-top" alt="Appointment Scheduling" />
@@ -101,7 +94,6 @@
                 </div>
             </div>
 
-            <!-- Data Security Feature -->
             <div class="col-md-4">
                 <div class="card">
                     <img src="img/security.jpg" class="card-img-top" alt="Data Security" />
@@ -214,12 +206,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footbar text-white text-center py-3">
         <p>&copy; 2024 MedConnectPro. All rights reserved.</p>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>

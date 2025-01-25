@@ -8,14 +8,12 @@ include 'db_connection.php';
 
 $doctor_id = $_SESSION['doctor_id'];
 
-// Fetch patients for this doctor
 $stmt = $conn->prepare("SELECT ehr_id, patient_name, dob, gender, country FROM patient_ehr WHERE doctor_id = ?");
 $stmt->bind_param("i", $doctor_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $patients = [];
 while ($row = $result->fetch_assoc()) {
-    // Convert dob from yyyy-mm-dd to dd-mm-yyyy for display
     $dob = $row['dob'];
     if ($dob && $dob !== '0000-00-00') {
         $dateParts = explode('-', $dob);
@@ -24,7 +22,6 @@ while ($row = $result->fetch_assoc()) {
         $dobDisplay = '';
     }
 
-    // Split patient_name into firstName and lastName if needed
     $parts = explode(' ', $row['patient_name'], 2);
     $firstName = $parts[0];
     $lastName = isset($parts[1]) ? $parts[1] : '';
@@ -74,7 +71,6 @@ $patientsJson = json_encode($patients);
     var patientsData = <?php echo $patientsJson; ?>;
     </script>
 
-    <!-- Page Content -->
     <div class="container mt-4">
         <h2>Patient List</h2>
 
@@ -111,7 +107,6 @@ $patientsJson = json_encode($patients);
     <script src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript for populating and searching the patient list -->
     <script src="js/patients.js"></script>
 </body>
 

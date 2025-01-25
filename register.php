@@ -1,11 +1,9 @@
 <?php
-// Include database connection
 include 'db_connection.php';
 
 $errorMessage = "";
 $successMessage = "";
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullName = $conn->real_escape_string($_POST['fullName']);
     $email = $conn->real_escape_string($_POST['email']);
@@ -13,26 +11,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirmPassword = $_POST['confirmPassword'];
     $specialization = $conn->real_escape_string($_POST['specialization']);
 
-    // Check if passwords match
     if ($password !== $confirmPassword) {
         $errorMessage = "Passwords do not match.";
     } else {
-        // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        // Check if email already exists
         $emailCheckQuery = "SELECT * FROM doctors WHERE email = '$email'";
         $emailCheckResult = $conn->query($emailCheckQuery);
 
         if ($emailCheckResult->num_rows > 0) {
             $errorMessage = "Email is already registered.";
         } else {
-            // Insert the new doctor into the database
             $sql = "INSERT INTO doctors (full_name, email, specialization, password) 
                     VALUES ('$fullName', '$email', '$specialization', '$hashedPassword')";
 
             if ($conn->query($sql)) {
-                // Registration successful, redirect to login page
                 header('Location: login.php');
                 exit;
             } else {
@@ -114,7 +107,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </footer>
 
     <script src="js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/register.js"></script>
+    < script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
+        </script>
 </body>
 
 </html>

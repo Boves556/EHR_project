@@ -2,14 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const imageContainer = document.getElementById("imageContainer");
   const uploadImageInput = document.getElementById("uploadImageInput");
 
-  // Initialize datepicker
   $(".datepicker").datepicker({
     format: "dd-mm-yyyy",
     autoclose: true,
     todayHighlight: true,
   });
 
-  // Save button event
   const saveButton = document.getElementById("savePatientInfo");
   if (saveButton) {
     saveButton.addEventListener("click", function () {
@@ -18,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Delete button event
   const deleteButton = document.getElementById("deletePatientInfo");
   if (deleteButton) {
     deleteButton.addEventListener("click", function () {
@@ -29,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Handle image upload functionality
   if (uploadImageInput) {
     uploadImageInput.addEventListener("change", function () {
       const files = Array.from(this.files);
@@ -63,12 +59,10 @@ document.addEventListener("DOMContentLoaded", function () {
           alert("An error occurred during upload. Please try again.");
         });
 
-      // Clear the input value to allow re-uploads
       this.value = "";
     });
   }
 
-  // Function to add an image (base64) to the container
   function addImageToContainer(base64String, imageId, fileName) {
     if (!imageId || !base64String) {
       console.error("Invalid image data:", { imageId, base64String });
@@ -98,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
     imageContainer.appendChild(imageWrapper);
   }
 
-  // Function to delete an image from the server and UI
   function deleteImage(imageId, imageWrapper) {
     if (!imageId) {
       console.error("Invalid image ID:", imageId);
@@ -133,7 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Single-line fields (no newlines allowed)
   const horizontalFields = [
     "mobile",
     "email",
@@ -154,14 +146,11 @@ document.addEventListener("DOMContentLoaded", function () {
       field.style.whiteSpace = "nowrap";
       field.style.textOverflow = "ellipsis";
       field.addEventListener("input", function () {
-        // Prevent new lines in single-line fields
         this.value = this.value.replace(/\n/g, "");
       });
     }
   });
 
-  // Multi-line, expandable fields (preserve new lines)
-  // Multi-line, expandable fields (preserve new lines)
   const expandableFields = [
     "symptoms",
     "familyHistory",
@@ -178,12 +167,10 @@ document.addEventListener("DOMContentLoaded", function () {
       field.style.height = "auto";
       field.style.overflowY = "hidden";
       field.addEventListener("input", function () {
-        // Ensure textarea auto-expands while retaining content newlines
         this.style.height = "auto";
         this.style.height = `${this.scrollHeight}px`;
       });
 
-      // Replace visible newlines in field data if needed
       if (field.value) {
         field.value = field.value.replace(/\\n/g, "\n");
       }

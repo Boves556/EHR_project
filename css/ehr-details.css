@@ -3,10 +3,8 @@
   overflow-y: scroll;
   height: auto;
   min-height: calc(1.5em * 4);
-  /* 5 lines high */
 }
 
-/* Adjust button container margin */
 .patient-sidebar .d-flex {
   margin-top: 1rem;
 }

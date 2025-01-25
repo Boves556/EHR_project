@@ -15,7 +15,6 @@ function displayPatients(patients) {
 
   patients.forEach((patient) => {
     const row = document.createElement("tr");
-    // patient.dob is dd-mm-yyyy from server
     const age = calculateAge(patient.dob);
 
     row.innerHTML = `

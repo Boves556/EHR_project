@@ -8,24 +8,21 @@ include 'db_connection.php';
 
 $doctor_id = $_SESSION['doctor_id'];
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstName = $conn->real_escape_string($_POST['firstName']);
     $lastName = $conn->real_escape_string($_POST['lastName']);
-    $dobInput = $_POST['dob']; // dd-mm-yyyy
+    $dobInput = $_POST['dob']; 
     $gender = $conn->real_escape_string($_POST['gender']);
     $country = $conn->real_escape_string($_POST['country']);
 
-    // Convert dd-mm-yyyy to yyyy-mm-dd for database
     $dateParts = explode('-', $dobInput);
     if (count($dateParts) === 3) {
         $dobFormatted = $dateParts[2] . '-' . $dateParts[1] . '-' . $dateParts[0];
     } else {
-        $dobFormatted = NULL; // or handle error
+        $dobFormatted = NULL; 
     }
 
-    // Insert into patient_ehr
-    // Only a subset of columns are filled now; others can be NULL
+    
     $patient_name = $firstName . ' ' . $lastName;
     $stmt = $conn->prepare("INSERT INTO patient_ehr (doctor_id, patient_name, dob, gender, country) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("issss", $doctor_id, $patient_name, $dobFormatted, $gender, $country);
@@ -70,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </nav>
 
-    <!-- Patient Form -->
     <div class="container mt-5">
         <h2 class="text-center mb-4">Add New Patient</h2>
         <?php if (!empty($error)): ?>
@@ -103,7 +99,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="Country" class="form-label fw-bold"><strong>Country of Origin:</strong></label>
                 <select class="form-select" id="Country" name="country">
                     <option value="" disabled selected>Select Country</option>
-                    <!-- List of countries -->
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Albania">Albania</option>
                     <option value="Algeria">Algeria</option>
@@ -310,7 +305,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="Yemen">Yemen</option>
                     <option value="Zambia">Zambia</option>
                     <option value="Zimbabwe">Zimbabwe</option>
-                    <!-- You can add the full list here as in your original code -->
                 </select>
             </div>
             <button type="submit" class="btn btn-gradient-purple w-100">Save Patient</button>

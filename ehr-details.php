@@ -9,14 +9,12 @@ include 'db_connection.php';
 
 $doctor_id = $_SESSION['doctor_id'];
 
-// Validate and sanitize EHR ID
 $ehr_id = isset($_GET['ehr_id']) ? filter_var($_GET['ehr_id'], FILTER_VALIDATE_INT) : 0;
 if ($ehr_id <= 0) {
     echo "Invalid EHR ID.";
     exit;
 }
 
-// Helper functions for date conversion and input validation
 function toDate($d) {
     if (empty($d)) return NULL;
     $parts = explode('-', $d);
@@ -35,7 +33,6 @@ function decodeText($text) {
     return htmlspecialchars(stripslashes($text), ENT_QUOTES);
 }
 
-// Handle Save Changes (Update) via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save') {
     $patientName = $conn->real_escape_string($_POST['patientName']);
     $dobInput = $_POST['dob'];
@@ -84,7 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// Handle Delete
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
     $stmt = $conn->prepare("DELETE FROM patient_ehr WHERE ehr_id=? AND doctor_id=?");
     $stmt->bind_param("ii", $ehr_id, $doctor_id);
@@ -97,7 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// Fetch patient details
 $stmt = $conn->prepare("SELECT * FROM patient_ehr WHERE ehr_id=? AND doctor_id=?");
 $stmt->bind_param("ii", $ehr_id, $doctor_id);
 $stmt->execute();
@@ -108,7 +103,6 @@ if (!$patient) {
     exit;
 }
 
-// Decode and prepare text fields for display
 $decodedSymptoms = decodeText($patient['symptoms']);
 $decodedFamilyHistory = decodeText($patient['family_history']);
 $decodedScanTests = decodeText($patient['scan_tests']);
@@ -117,7 +111,6 @@ $decodedMedications = decodeText($patient['medications']);
 $decodedLabTests = decodeText($patient['lab_tests']);
 $decodedDoctorNotes = decodeText($patient['doctor_notes']);
 
-// Convert dates for display
 function displayDate($d) {
     if (empty($d) || $d === '0000-00-00') return '';
     $parts = explode('-', $d);
@@ -127,14 +120,12 @@ function displayDate($d) {
 $displayDob = displayDate($patient['dob']);
 $displayAppointmentDate = displayDate($patient['appointment_date']);
 
-// Fetch images (using the image_data column)
 $stmt = $conn->prepare("SELECT image_id, image_path, image_data FROM ehr_images WHERE ehr_id=? AND doctor_id=?");
 $stmt->bind_param("ii", $ehr_id, $doctor_id);
 $stmt->execute();
 $images_result = $stmt->get_result();
 $images = $images_result->fetch_all(MYSQLI_ASSOC);
 
-// Handle Upload and Delete image requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($_POST['action'] === 'upload_image') {
         $uploadedFiles = $_FILES['images'];
@@ -231,7 +222,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         <input type="hidden" name="action" value="" id="formAction" />
         <div class="container-fluid">
             <div class="row">
-                <!-- Left Sidebar for Patient Details -->
                 <div class="col-md-3 patient-sidebar">
                     <?php if (!empty($errorMessage)): ?>
                     <div class="alert alert-danger"><?php echo htmlspecialchars($errorMessage); ?></div>
@@ -478,10 +468,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                             <option value="Zambia">Zambia</option>
                             <option value="Zimbabwe">Zimbabwe</option>
                             <?php
-                            // Example: pre-select the country
                             $selectedCountry = $patient['country'];
-                            // You can regenerate the full list of countries here similarly to ehr.php if needed,
-                            // and echo selected='selected' if $selectedCountry == option.
+                         
                             ?>
                             <option value="<?php echo htmlspecialchars($selectedCountry); ?>" selected>
                                 <?php echo htmlspecialchars($selectedCountry); ?></option>
@@ -489,7 +477,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     </div>
                     <div class="mb-3">
                         <label for="editAppointments" class="form-label fw-bold"><strong>Appointments:</strong></label>
-                        <!-- Add .datepicker class to enable calendar -->
                         <input type="text" class="form-control mb-2 datepicker" id="appointmentDate"
                             name="appointmentDate" placeholder="dd-mm-yyyy"
                             value="<?php echo htmlspecialchars($displayAppointmentDate); ?>" />
@@ -503,7 +490,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     </div>
                 </div>
 
-                <!-- Main EHR Content -->
                 <div class="col-md-9">
                     <div class="ehr-section mt-2">
                         <h5 class="form-label fw-bold">PATIENT'S INFORMATION:</h5>

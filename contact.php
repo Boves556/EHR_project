@@ -11,10 +11,8 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <!-- Brand Logo -->
             <div>
                 <a class="navbar-brand" href="index.php"><img src="img/logo_main.png" alt="Logo" /></a>
             </div>
@@ -23,7 +21,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Left-aligned links closer to the brand logo -->
                 <div class="mx-auto">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -41,7 +38,6 @@
                     </ul>
                 </div>
 
-                <!-- Right-aligned Login and Register buttons -->
                 <div>
                     <ul class="navbar-nav ms-auto gap-1">
                         <li class="nav-item">
@@ -59,7 +55,6 @@
     <div class="container my-5">
         <h1 class="text-center mb-4 hero-subheading">Contact Us</h1>
         <div class="row g-5">
-            <!-- Contact Information -->
             <div class="col-lg-5">
                 <div class="bg-light p-4 shadow-sm rounded">
                     <h3 class="hero-subheading">Our Contact Details</h3>
@@ -90,7 +85,6 @@
                 </div>
             </div>
 
-            <!-- Contact Form -->
             <div class="col-lg-7">
                 <div class="bg-light p-4 shadow-sm rounded">
                     <h3 class="hero-subheading mb-4">Send Us a Message</h3>
@@ -124,12 +118,10 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footbar text-white text-center py-3">
         <p>&copy; 2024 MedConnectPro. All rights reserved.</p>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>

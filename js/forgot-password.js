@@ -1,4 +1,3 @@
-// Password reset functionality
 document
   .getElementById("resetPasswordForm")
   .addEventListener("submit", function (event) {
@@ -8,7 +7,6 @@ document
     const newPassword = document.getElementById("newPassword").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
-    // Check if the email exists in localStorage
     const storedDoctor = JSON.parse(
       localStorage.getItem("doctor_" + emailInput.value)
     );
@@ -17,13 +15,11 @@ document
       return;
     }
 
-    // Validate that passwords match
     if (newPassword !== confirmPassword) {
       document.getElementById("confirmPassword").classList.add("is-invalid");
     } else {
       document.getElementById("confirmPassword").classList.remove("is-invalid");
 
-      // Update the doctor's password in localStorage
       storedDoctor.password = newPassword;
       localStorage.setItem(
         "doctor_" + emailInput.value,
@@ -31,6 +27,6 @@ document
       );
 
       alert("Password successfully updated!");
-      window.location.href = "index.html"; // Redirect to the login page
+      window.location.href = "index.html";
     }
   });

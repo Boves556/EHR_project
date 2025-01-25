@@ -11,10 +11,8 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <!-- Brand Logo -->
             <div>
                 <a class="navbar-brand" href="index.php"><img src="img/logo_main.png" alt="Logo" /></a>
             </div>
@@ -23,7 +21,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Left-aligned links closer to the brand logo -->
                 <div class="mx-auto">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -41,7 +38,6 @@
                     </ul>
                 </div>
 
-                <!-- Right-aligned Login and Register buttons -->
                 <div>
                     <ul class="navbar-nav ms-auto gap-1">
                         <li class="nav-item">
@@ -63,7 +59,6 @@
             our wide range of services.
         </p>
         <div class="row g-4">
-            <!-- Service 1 -->
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 h-100">
                     <img src="img/telemedicine.jpg" class="card-img-top" alt="Telemedicine Service" />
@@ -76,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Service 2 -->
+
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 h-100">
                     <img src="img/ehr.jpg" class="card-img-top" alt="Electronic Health Records" />
@@ -89,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Service 3 -->
+
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 h-100">
                     <img src="img/ai_diagnosis.jpg" class="card-img-top" alt="AI Diagnosis Tools" />
@@ -105,7 +100,6 @@
         </div>
 
         <div class="row g-4 mt-4">
-            <!-- Service 4 -->
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 h-100">
                     <img src="img/health_analytics.jpg" class="card-img-top" alt="Health Analytics" />
@@ -118,7 +112,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Service 5 -->
+
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 h-100">
                     <img src="img/remote_monitoring.jpg" class="card-img-top" alt="Remote Patient Monitoring" />
@@ -131,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Service 6 -->
+
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 h-100">
                     <img src="img/pharmacy.jpg" class="card-img-top" alt="Pharmacy Integration" />
@@ -148,12 +142,10 @@
     </div>
 
 
-    <!-- Footer -->
     <footer class="footbar text-white text-center py-3">
         <p>&copy; 2024 MedConnectPro. All rights reserved.</p>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>

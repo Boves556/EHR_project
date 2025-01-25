@@ -11,10 +11,8 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <!-- Brand Logo -->
             <div>
                 <a class="navbar-brand" href="index.php"><img src="img/logo_main.png" alt="Logo" /></a>
             </div>
@@ -23,7 +21,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Left-aligned links closer to the brand logo -->
                 <div class="mx-auto">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -41,7 +38,6 @@
                     </ul>
                 </div>
 
-                <!-- Right-aligned Login and Register buttons -->
                 <div>
                     <ul class="navbar-nav ms-auto gap-1">
                         <li class="nav-item">
@@ -63,7 +59,6 @@
             integration and optimal patient care.
         </p>
 
-        <!-- Introduction Section -->
         <div class="row align-items-center mb-5">
             <div class="col-md-6">
                 <img src="img/ehr_intro.jpg" alt="EHR Overview" class="img-fluid rounded shadow">
@@ -82,7 +77,6 @@
             </div>
         </div>
 
-        <!-- Features Section -->
         <div class="py-5 bg-light rounded">
             <h2 class="text-center mb-4 hero-subheading">Our Features</h2>
             <div class="row text-center">
@@ -102,7 +96,6 @@
             </div>
         </div>
 
-        <!-- Why Choose Us Section -->
         <div class="row align-items-center my-5">
             <div class="col-md-6 order-md-2">
                 <img src="img/ehr_benefits.jpg" alt="Why Choose Us" class="img-fluid rounded shadow">
@@ -131,35 +124,41 @@
             </div>
         </div>
 
-        <!-- Team Section -->
-        <!-- <div class="py-5 bg-light rounded">
-            <h2 class="text-center mb-4 hero-subheading">Meet Our Team</h2>
+        <div class="py-5 bg-light rounded">
+            <h2 class="text-center mb-4 hero-subheading">Meet Our Development Team</h2>
             <p class="text-center text-muted mb-5">
-                Our team is composed of passionate professionals dedicated to enhancing healthcare through technology.
+                Our team is composed of passionate professionals dedicated to enhancing healthcare using our
+                modernized software.
             </p>
             <div class="row text-center">
                 <div class="col-md-4 mb-4">
-                    <img src="img/team_member_1.jpg" alt="Team Member" class="rounded-circle mb-3 shadow"
-                        style="width: 150px;">
-                    <h5 class=" ">Dr. Sarah Johnson</h5>
-                    <p class="text-muted">Chief Medical Officer</p>
+                    <img src="img/Lucky.jpg" alt="Team Member" class="rounded-circle mb-3 shadow" style="width: 150px;">
+                    <h5>Enechukwu Lucky</h5>
+                    <p class="text-muted">Team Leader, Frontend developer</p>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <img src="img/team_member_2.jpg" alt="Team Member" class="rounded-circle mb-3 shadow"
-                        style="width: 150px;">
-                    <h5 class=" ">Michael Adams</h5>
-                    <p class="text-muted">Head of Technology</p>
+                    <img src="img/Ivie.jpg" alt="Team Member" class="rounded-circle mb-3 shadow" style="width: 150px;">
+                    <h5>Udeh Adaeze</h5>
+                    <p class="text-muted">Frontend developer</p>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <img src="img/team_member_3.jpg" alt="Team Member" class="rounded-circle mb-3 shadow"
-                        style="width: 150px;">
-                    <h5 class=" ">Emily Carter</h5>
-                    <p class="text-muted">Product Manager</p>
+                    <img src="img/emma.jpg" alt="Team Member" class="rounded-circle mb-3 shadow" style="width: 150px;">
+                    <h5>Adedipe Emmanuel</h5>
+                    <p class="text-muted">Database Manager</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="img/joke.jpg" alt="Team Member" class="rounded-circle mb-3 shadow" style="width: 150px;">
+                    <h5>Onajokeoghene Piomoki Stevens</h5>
+                    <p class="text-muted">Project Manager</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="img/david.jpg" alt="Team Member" class="rounded-circle mb-3 shadow" style="width: 150px;">
+                    <h5>Ogbonna david</h5>
+                    <p class="text-muted">Backend developer</p>
                 </div>
             </div>
-        </div> -->
+        </div>
 
-        <!-- Call to Action -->
         <div class="text-center py-5 rounded bg-primary text-white">
             <h3 class="  mb-3">Join the Revolution in Healthcare</h3>
             <p class="lead">Discover the MedConnectPro difference and experience the future of healthcare today.</p>
@@ -167,12 +166,10 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footbar text-white text-center py-3">
         <p>&copy; 2024 MedConnectPro. All rights reserved.</p>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>

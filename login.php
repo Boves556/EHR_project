@@ -1,26 +1,21 @@
 <?php
-// Include database connection
 include 'db_connection.php';
 
 session_start();
 $errorMessage = "";
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $conn->real_escape_string($_POST['email']);
     $password = $_POST['password'];
 
-    // Query to check user credentials
     $sql = "SELECT * FROM doctors WHERE email = '$email'";
     $result = $conn->query($sql);
 
     if ($result && $result->num_rows === 1) {
         $user = $result->fetch_assoc();
-        // Verify password
         if (password_verify($password, $user['password'])) {
-            // Set session variables
             $_SESSION['loggedIn'] = true;
-            $_SESSION['doctor_id'] = $user['id']; // Ensure 'id' is the PK column in doctors table
+            $_SESSION['doctor_id'] = $user['id']; 
             $_SESSION['doctorName'] = $user['full_name'];
             $_SESSION['doctorEmail'] = $user['email'];
             $_SESSION['specialization'] = $user['specialization'];
